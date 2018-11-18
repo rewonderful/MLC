@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
 from ListNode import ListNode
-from Queue import PriorityQueue()
+from Queue import PriorityQueue
 
 def mergeKLists(self, lists):
     """
