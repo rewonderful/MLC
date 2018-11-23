@@ -6,6 +6,7 @@ class ListNode:
         self.next = None
 
 def chinese(data):
+    """asdfadsfadsfsda"""
     count = 0
     for s in data:
         if ord(s) > 127:
@@ -18,10 +19,10 @@ def singleNumber( nums):
     :rtype: int
     """
     for i in range(len(nums)):
-        if nums[i] not in nums[i + 1:]:
-            return nums[i]
+        if nums[i] % 2 == 0:
+            print(nums[i])
 if __name__ == '__main__':
-    print(singleNumber([2,2,1]))
+    singleNumber([2,2,1])
 
 
 
