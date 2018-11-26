@@ -33,3 +33,23 @@ def generateParenthesis(self, n):
 
     backtracking('', 0, 0)
     return ans
+
+def generateParenthesis1( n):
+    """
+        My method
+    """
+
+    def generate(left, right, path, result):
+        if left + right == 2*n:
+            result.append(path)
+            return
+        if left < n:
+            generate(left + 1, right, path + '(', result)
+        if right < left:
+            generate(left, right + 1, path + ')', result)
+
+    result = []
+    generate(0, 0, '', result)
+    return result
+if __name__ == '__main__':
+    print(generateParenthesis1(3))
