@@ -35,8 +35,28 @@ def searchInsert( nums, target):
             low += 1
         else:
             high -= 1
-    return low   #如果没有找到，那么应该返回最大位置,因为已经跳出了while，说明low>high，应该返回lows
+    # 如果没有找到，那么应该返回最大位置,因为已经跳出了while，说明low>high，应该返回low,且若target < nums[lo]，
+    # 则应该target的位置就是lo，如果target>nums[lo]，那也应该返回当前的lo，lo超过数组边界了，lo == len(nums)
+    return low
+
+def searchInsert2( nums, target):
+    """
+    :type nums: List[int]
+    :type target: int
+    :rtype: int
+    """
+    lo = 0
+    hi = len(nums) - 1
+    while lo <= hi:
+        mid = (lo + hi) // 2
+        if target == nums[mid]:
+            return mid
+        if target > nums[mid]:
+            lo = mid + 1
+        if target < nums[mid]:
+            hi = mid - 1
+    return lo
 if __name__ == '__main__':
-    nums=[1,2,3,4]
-    target = 5
-    searchInsert(nums,target)
+    nums=[1,3,5,6]
+    target = 0
+    print(searchInsert2(nums,target))
