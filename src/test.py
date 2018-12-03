@@ -21,8 +21,20 @@ def singleNumber( nums):
     for i in range(len(nums)):
         if nums[i] % 2 == 0:
             print(nums[i])
+from TreeNode import TreeNode
+def modify(t):
+
+    b = t
+    b.val = 3
+    print('inner:',id(b))
 if __name__ == '__main__':
-    singleNumber([2,2,1])
+    t = TreeNode(10)
+    print(id(t))
+    print(t.val)
+    modify(t)
+    print(id(t))
+    print(t.val)
+
 
 
 
