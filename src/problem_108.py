@@ -21,11 +21,33 @@ def sortedArrayToBST( nums):
         return None
     center = len(nums) // 2
     root = TreeNode(nums[center])
-    left = sortedArrayToBST(nums[:center])
-    right = sortedArrayToBST(nums[center:])
-    root.left = left
-    root.right = right
+    root.left = sortedArrayToBST(nums[:center])
+    root.right = sortedArrayToBST(nums[center:])
     return root
+
+def sortedArrayToBST1(self, nums):
+    """
+     以下算法为用二叉树搜索，其效率更高！
+     因为不用切片取左右子区间了
+     并且
+     该算法更加通用，在没有切片操作的语言中也可以用
+     下面的
+        if lo == hi XXX
+        是"剪枝"操作，lo==hi时就是叶子节点了，无需向下递归，直接return就好
+    """
+
+    def constructBST(lo, hi):
+        if lo > hi:
+            return None
+        mid = (lo + hi) // 2
+        root = TreeNode(nums[mid])
+        if lo == hi:
+            return root
+        root.left = constructBST(lo, mid - 1)
+        root.right = constructBST(mid + 1, hi)
+        return root
+
+    return constructBST(0, len(nums) - 1)
 if __name__ == '__main__':
     print(sortedArrayToBST([-10,-3,0,5,9]))
 
