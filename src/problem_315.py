@@ -80,6 +80,98 @@ def countSmaller( nums):
     count = [0]*len(nums)
     merge(pairs, count)
     return count
+def countSmaller1(self, nums):
+    """
+    BST Method
+    利用 二分查找来做！
+    对列表元素倒着挨个插入一个列表构成有序列表，插入时该节点的插入位置即为比该节点小的节点数目
+    要注意的是，要用bisect_left来找，bisect_left和bisect_right的不同在于对同一数值的元素
+    bisect_left返回左值，bisect_right返回右值
+    如
+        r = [1,2,3,4,5],插入4，
+            bisect_left 返回3，bisect_right返回4
+    """
+    import bisect
+    r = []
+    res = [0] * len(nums)
+    for i in range(len(nums) - 1, -1, -1):
+        bisect.insort(r, nums[i])
+        res[i] = bisect.bisect_left(r, nums[i])
+    return res
+"""
+------------------------------------------------------------------------------
+    Disscussion Method
+    
+    用二叉搜索树BST来做！
+    [5, -7, 9, 1, 3, 5, -2, 1] 的逆序数可以看做把列表倒过来
+    [1, -2, 5, 3, 1, 9, -7, 5]的每个元素前面有几个元素比它小！
+        可以用BST的特性，BST根节点左子树的节点值总小于根节点，右子树节点值总大于根节点
+    以nums的倒过来后的顺序构建BST，并且在构建过程中记录比当前值小的节点有几个，亦即左子树节点大小
+    所以在插入节点的时候，就可以更新根节点的左子树数目值
+"""
+class TreeNode:
+    """
+    定义BST树节点的形式，count记录值为val的节点有几个，来处理值val相同的节点时的情况
+    leftTreeSize记录的是：
+        此时此刻，t时刻，val这么大的节点的左子树节点数目，因为递归插入的时候，可以看做节点会流入root节点并向左
+    走，这样root节点的左子树数目就多了一个，所以用leftTreeSize来记录
+    """
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+        self.count = 1
+        self.leftTreeSize = 0
+class BinarySearchTree:
+    """
+    定义BST树
+    insert()函数返回的就是向BST树插入值为val的节点时，该节点的逆序数的数目
+    注意，此时此刻leftTreeSize和count已记录了某一节点root处的左子树节点数目和root同值的节点数量
+    so
+    if val == root.val:
+        root.count += 1
+        return root.leftTreeSize
+    val < root.val:
+        root.leftTreeSize += 1
+        if root 没有左子树，则以val构建左子树，并且它是最小的，return 0
+        否则
+            return 向左递归，因为val < root.val，所以一定不会加已经遍历过得节点的leftTreeSise什么的
+    否则 val > root.val
+        if root 没有右子树，则以val构建右子树，并且它是当前最大的，
+            return root.leftTreeSise + root.count -->把root的左子树数量和自己献祭出去
+        否则：
+            return root.leftTreeSise + root.count + 继续向右递归，把当前层的root左子树和自己交出去，并且还要加下一层的
+    """
+    def __init__(self):
+        self.root = None
+    def insert(self, val, root):
+        if not root:
+            self.root = TreeNode(val)
+            return 0
+        if val == root.val:
+            root.count += 1
+            return root.leftTreeSize
+
+        if val < root.val:
+            root.leftTreeSize += 1
+            if not root.left:
+                root.left = TreeNode(val)
+                return 0
+            else:
+                return self.insert(val, root.left)
+        else:
+            if not root.right:
+                root.right = TreeNode(val)
+                return root.count + root.leftTreeSize
+            else:
+                return root.count + root.leftTreeSize + self.insert(val, root.right)
+class Solution:
+    def countSmaller(self, nums):
+        tree = BinarySearchTree()
+        result = [tree.insert(nums[i], tree.root)for i in range(len(nums) - 1, -1, -1)]
+        result = result[::-1]
+        return result
+
 
 if __name__ == '__main__':
     #print(countSmaller([9,8,7,6,5,4,3,2,1,0]))
