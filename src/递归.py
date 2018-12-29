@@ -8,4 +8,3 @@ def recursion(n):
 
 if __name__ == '__main__':
     print(recursion(4))
-    max()
