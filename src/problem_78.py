@@ -47,6 +47,25 @@ def subsets0( nums):
 
     return result
 
+def subsets_new(self, nums):
+    """
+    :type nums: List[int]
+    :rtype: List[List[int]]
+    """
+    self.ans = [[]]
+    self.set = {}
+
+    def dfs(i, subset):
+        subset.append(nums[i])
+        if tuple(subset) not in self.set:
+            self.ans.append(subset)
+        for j in range(i + 1, len(nums)):
+            dfs(j, subset[:])
+
+    for i in range(len(nums)):
+        dfs(i, [])
+
+    return self.ans
 def subsets1(self, nums):
     """
     算法：位运算

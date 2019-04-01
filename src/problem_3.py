@@ -58,7 +58,7 @@ def lengthOfLongestSubstring2(s):
 
 if __name__ == '__main__':
     #print(lengthOfLongestSubstring("bbbbb"))
-    print(lengthOfLongestSubstring("abbaaaaa"))
+    print(lengthOfLongestSubstring("abba"))
 
 
 

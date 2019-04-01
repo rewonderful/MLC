@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
+import copy
 class Solution0:
     """
     借鉴Disscusion中的答案

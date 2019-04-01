@@ -16,9 +16,6 @@ def monotonousStack(nums):
             ans[index] = i - index
         stack.append(i)
     return ans
-
-
-
 if __name__ == '__main__':
     testcase = [5,3,1,2,4]
     testcase2 = [9, 3, 5, 8, 2, 6]
