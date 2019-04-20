@@ -35,3 +35,24 @@ def deleteDuplicates( head):
             pre.next = curr.next
         curr = curr.next
     return dummy.next
+
+def deleteDuplicates1(self, head):
+    """
+    :type head: ListNode
+    :rtype: ListNode
+    p定位不重复元素的位置，q在重复区间一直查找
+    """
+    if head == None or head.next == None:
+        return head
+    dummy = ListNode(0)
+    dummy.next = head
+    p = dummy
+    while p:
+        q = p.next
+        if q and q.next and q.val == q.next.val:
+            while q != None and q.val == p.next.val:
+                q = q.next
+            p.next = q
+        else:
+            p = p.next
+    return dummy.next
