@@ -1,5 +1,23 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
+class Solution:
+    def searchMatrix(self, matrix, target):
+        """
+        :type matrix: List[List[int]]
+        :type target: int
+        :rtype: bool
+        """
+        if matrix == [] or matrix[0] == []:
+            return False
+        x, y = 0,len(matrix[0])-1
+        while x < len(matrix) and y >= 0:
+            if matrix[x][y] == target:
+                return True
+            elif target > matrix[x][y]:
+                x += 1
+            else:
+                y -= 1
+        return False
 def searchMatrix(self, matrix, target):
     """
     算法：剥洋葱式解法

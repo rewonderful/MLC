@@ -27,9 +27,11 @@ def solveNQueens0(self, n):
             locations.append(chessboard[:])
             return
         for col in range(n):
-            chessboard[row] = col  # 第row行放在第col列上
+            chessboard[row] = col
+            # 第row行放在第col列上,每一行总要考虑放在一个地方的，所以for循环对每个地方都尝试。如果最后都尝试都没有，就return，直接截止
             if valid(chessboard, row):
                 dfs(chessboard[:], row + 1, locations)
+        return
 
     locations = []
     ans = []

@@ -1,5 +1,23 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
+def minPathSum0( grid):
+    """
+
+    直接用grid就好，没有必要再新建一个dp数组了
+    因为遍历顺序反正也是一行一行的，且直接用grid，先后顺序也不影响。前面的值即使原地改变了，对后面也没影响的
+    """
+    if not grid:
+        return 0
+    m = len(grid)
+    n = len(grid[0])
+    for i in range(1, m):
+        grid[i][0] += grid[i - 1][0]
+    for j in range(1, n):
+        grid[0][j] += grid[0][j - 1]
+    for i in range(1, m):
+        for j in range(1, n):
+            grid[i][j] += min(grid[i - 1][j], grid[i][j - 1])
+    return grid[-1][-1]
 def minPathSum(self, grid):
     """
     My Method

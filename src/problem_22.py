@@ -1,5 +1,24 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
+class Solution(object):
+    def generateParenthesis(self, n):
+        """
+        :type n: int
+        :rtype: List[str]
+        """
+        self.ans = []
+        if n == 0:
+            return self.ans
+        def dfs(left,right,path):
+            if left == 0 and right == 0:
+                self.ans.append(path)
+            if left >0:
+                dfs(left-1,right,path+'(')
+            if right > 0 and right > left:
+                dfs(left,right-1,path+')')
+        dfs(n,n,'')
+        return self.ans
+
 def generateParenthesis(self, n):
     """
     问题分析：

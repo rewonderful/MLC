@@ -28,6 +28,8 @@ def subsets0( nums):
             的子集，而不是每一时刻的子集都指向内存中的同一个列表对象，这样各个位置改变的都是同一个列表
             最终无法得到我们要的各不同的子集状态
 
+
+
     复杂度分析：
         时间：O2^N，遍历所有O2^N个子集（也是O2^N种可能的情况）
         空间：O2^N，递归栈空间以及存储子集的result的空间
@@ -46,6 +48,19 @@ def subsets0( nums):
     generate(0, nums, [], result)
 
     return result
+"""
+或者
+ def subsets(self, nums):
+        self.ans = []
+        def generate(i,path):
+            if i >= len(nums)  :
+                self.ans.append(path) #相当于是在叶子节点，把生成的子集加进来
+                return
+            generate(i+1,path+[nums[i]]) #相当于二叉树左分支，当前nums[i] append进去
+             generate(i+1,path)  #相当于二叉树右分支，当前nums[i]，不加进去
+        generate(0,[]) 
+        return self.ans
+"""
 
 def subsets_new(self, nums):
     """

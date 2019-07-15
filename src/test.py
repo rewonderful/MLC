@@ -1,44 +1,23 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
-class ListNode:
-    def __init__(self,x):
-        self.val = x
-        self.next = None
-
-def chinese(data):
-    """asdfadsfadsfsda"""
-    count = 0
-    for s in data:
-        if ord(s) > 127:
-            count += 1
-    return count
-
-def singleNumber( nums):
+def generateParenthesis( n):
     """
-    :type nums: List[int]
-    :rtype: int
+    :type n: int
+    :rtype: List[str]
     """
-    for i in range(len(nums)):
-        if nums[i] % 2 == 0:
-            print(nums[i])
-from TreeNode import TreeNode
-def modify(t):
+    ans = []
+    if n == 0:
+        return ans
 
-    b = t
-    b.val = 3
-    print('inner:',id(b))
+    def dfs(left, right, path):
+        if left + right == 2 * n:
+            ans.append(path)
+        if left < n:
+            dfs(left + 1, right, path + '(')
+        if right < n and right < left:
+            dfs(left, right + 1, path + ')')
+
+    dfs(0, 0, '')
+    return ans
 if __name__ == '__main__':
-    t = TreeNode(10)
-    print(id(t))
-    print(t.val)
-    modify(t)
-    print(id(t))
-    print(t.val)
-    import  numpy as np
-    a = np.array([1,2,3])
-    np.mean()
-
-
-
-
-
+    print(generateParenthesis(3))

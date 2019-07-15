@@ -1,6 +1,29 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
 from ListNode import ListNode
+
+
+def swapPairs0(self, head):
+    """
+    do as they say
+    按照人家的要求来
+    """
+    if head == None or head.next == None:
+        return head
+    dummy = ListNode(0)
+    p = dummy
+    dummy.next = head
+    while p and p.next and p.next.next:
+        first = p.next
+        second = p.next.next
+        third = p.next.next.next
+
+        p.next = second
+        second.next = first
+        first.next = third
+
+        p = first
+    return dummy.next
 def swapPairs(self, head):
     """
     My Method

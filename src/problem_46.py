@@ -1,5 +1,21 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
+class Solution:
+    """
+    remain == []的时候说明一条排列已经生成了，append就好
+    递归，其实就是一种特殊的循环，这种循环遍历的是一种树形结构，不是for循环那样的线性结构，
+
+    """
+    def permute(self, nums):
+        self.ans = []
+        def dfs(permutation,remain):
+            if remain == []:
+                self.ans.append(permutation)
+                return
+            for i in range(len(remain)):
+                dfs(permutation+[remain[i]],remain[:i]+remain[i+1:])
+        dfs([],nums)
+        return self.ans
 def permute0( nums):
     """
     My Method
