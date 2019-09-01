@@ -1,5 +1,24 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
+def maxProfit7( prices):
+    """
+    :param prices:
+    :return:
+
+    for 从 2开始更合理，要小心not_holds在0，1时的值
+    """
+
+    if prices == [] or len(prices) == 1:
+        return 0
+    holds = [0] * len(prices)
+    not_holds = [0] * len(prices)
+    holds[0] = -prices[0]
+    holds[1] = max(-prices[0], -prices[1])
+    not_holds[0], not_holds[1] = 0, max(0, prices[1] - prices[0])
+    for i in range(2, len(prices)):
+        holds[i] = max(holds[i - 1], not_holds[i - 2] - prices[i])
+        not_holds[i] = max(not_holds[i - 1], holds[i - 1] + prices[i])
+    return max(holds[-1], not_holds[-1])
 def maxProfit0(self, prices):
     """
     这个是对下面思路的O1版本，因为当前状态只取决于上一个状态，所以可以用单个变量来记录关键的状态值
@@ -35,12 +54,13 @@ def maxProfit(self, prices):
         ，要么就是新买的，那么在买之前必须要卖出去手中的股票，而且因为有冷却期，所以必须在前天，i-2天卖出去股票，
         这样才可以在i-2天不持有股票，然后i-1天就是冷却期了，所以i-2天时不持有股票，这样才能在第i天买入
         股票，所以是not_holds[i-2]-prices[i]。
-            事实上可以更细致地考虑，第i天买入股票的话，第i-1天一定是不持有股票的，否则第i天是不能买入的，那么
+            事实上可以更细致地考虑，第i天买入股票的话，第i-1天一定是不持有股票的，否则第i天是不能买入的，且i-1天
+        肯定不能卖出，否则第i天是冷却期，，那么
         第i-1天不持有股票的状态，来自于两个方面，一个是i-2天本来就不持有股票，二者是传承下来的，或者是第i-2天
         售出了股票，这样第i-1天本来就是冷却期，所以这时候真正起作用是i-2天本身的状态，对i-1来说，not_holds[i-2]
         的状态是已经确定的，那一天不持有股票的最大收益。其实看下面的递推式也可以理解，因为第i-1天一定是不能拥有
         股票的，而not_holds的状态来源于两个（1.保持，2.此天售出）,不可能是第二个，所以对第i天要新买入股票来说，
-        必须是看第i-2天的not_holds状态。稍有点绕，或者就直观地，第i天想买，一定是第i-2天不持有股票后第i天才买
+        必须是看第i-2天的not_holds状态。稍有点绕，或者就直观地，⚠️【第i天想买，一定是第i-2天不持有股票后第i天才买】
             holds[i] = max(holds[i - 1], not_holds[i - 2] - prices[i])
             如果第i天是不持有股票的，那么要么就是和前一天一样啥也没做转移过来的，即not_holds[i-1],要么就是
         前一天是持有股票的，今天再卖出，那么就是holds[i-1]+prices[i]

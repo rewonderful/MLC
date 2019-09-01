@@ -1,5 +1,28 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
+def canFinish7( numCourses, prerequisites):
+    if numCourses == 0:
+        return True
+    in_degree = [[] for _ in range(numCourses)]
+
+    out_degree = [0] * numCourses
+
+    for x, y in prerequisites:
+        # x-->y
+        out_degree[x] += 1
+        in_degree[y].append(x)
+    zero_queue = []
+    for i in range(numCourses):
+        if out_degree[i] == 0:
+            zero_queue.append(i)
+    while len(zero_queue) > 0:
+        course = zero_queue.pop(0)
+        numCourses -= 1
+        for other_course in in_degree[course]:
+            out_degree[other_course] -= 1
+            if out_degree[other_course] == 0:
+                zero_queue.append(other_course)
+    return numCourses == 0
 def canFinish( numCourses, prerequisites):
     """
     算法：深搜

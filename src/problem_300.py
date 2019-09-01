@@ -1,6 +1,20 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
 import matplotlib.pyplot as plt
+
+
+def lengthOfLIS_7( nums) :
+    if nums == []:
+        return 0
+    ans = 1
+    dp = [1] * len(nums)
+    for i in range(1, len(nums)):
+        for j in range(i - 1, -1, -1):
+            if nums[i] > nums[j] and dp[j] + 1 > dp[i]:
+                dp[i] = dp[j] + 1
+        ans = max(ans, dp[i])
+
+    return ans
 def lengthOfLIS( nums):
     """
     算法：动规

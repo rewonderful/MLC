@@ -1,5 +1,43 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
+def combine2(self, n: int, k: int):
+    """
+    :param self:
+    :param n:
+    :param k:
+    :return:
+    一定是顺序往后的，就相当于每个节点为根节点，然后进行dfs的遍历。所以要理解树是特殊的图，dfs
+    本来是图中的概念，现在也可以直接用进来。就是每一刻的子空间都是在某个位置取选取一个元素，添加到
+    路径中。当len(path) == k的时候，就说明递归深度达到了我们的目标
+    """
+    self.ans = []
+    def dfs(i, path):
+        if len(path) == k:
+            self.ans.append(path[:])
+            return
+        for j in range(i + 1, n + 1):
+            dfs(j, path + [j])
+        return
+
+    for i in range(1, n - k + 2):
+        dfs(i, [i])
+    return self.ans
+"""
+或者👇，是把上面的for循环提出来了。上面的for循环其实相当于是剪枝，因为有的部分已经不能做根节点了，下面这种会更简洁
+"""
+def combine3(self, n: int, k: int) :
+    self.ans = []
+
+    def dfs(i, path):
+        if len(path) == k:
+            self.ans.append(path[:])
+            return
+        for j in range(i + 1, n + 1):
+            dfs(j, path + [j])
+        return
+
+    dfs(0, [])
+    return self.ans
 def combine(self, n, k):
     """
     My + Disscussion Method

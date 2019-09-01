@@ -39,7 +39,7 @@ def searchInsert( nums, target):
     # 则应该target的位置就是lo，如果target>nums[lo]，那也应该返回当前的lo，lo超过数组边界了，lo == len(nums)
     return low
 
-def searchInsert2( nums, target):
+def searchInsert77( nums, target):
     """
     :type nums: List[int]
     :type target: int
@@ -51,12 +51,12 @@ def searchInsert2( nums, target):
         mid = (lo + hi) // 2
         if target == nums[mid]:
             return mid
-        if target > nums[mid]:
+        elif target > nums[mid]:
             lo = mid + 1
-        if target < nums[mid]:
+        else:
             hi = mid - 1
-    return lo
+    return hi
 if __name__ == '__main__':
-    nums=[1,3,5,6]
-    target = 0
-    print(searchInsert2(nums,target))
+    nums=[0,5,10,15]
+    target = 6
+    print(searchInsert77(nums,target))

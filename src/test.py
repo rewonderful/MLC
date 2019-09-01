@@ -1,23 +1,21 @@
-#!/usr/bin/env python
-# _*_ coding:utf-8 _*_
-def generateParenthesis( n):
-    """
-    :type n: int
-    :rtype: List[str]
-    """
-    ans = []
-    if n == 0:
-        return ans
+def coinChange( coins, amount):
+    if amount == 0:
+        return 0
+    if len(coins) == 0:
+        return -1
+    coins.sort()
+    if coins[-1] > amount:
+        return -1
+    dp = [-1] * (amount + 1)
+    dp[0] = 0
+    for coin in coins:
+        dp[coin] = 1
+    for i in range(amount + 1):
+        for coin in coins:
+            if i - coin >= 0 and dp[i - coin] != -1:
+                if dp[i] == -1 or dp[i - coin] + 1 < dp[i]:
+                    dp[i] = dp[i - coin] + 1
 
-    def dfs(left, right, path):
-        if left + right == 2 * n:
-            ans.append(path)
-        if left < n:
-            dfs(left + 1, right, path + '(')
-        if right < n and right < left:
-            dfs(left, right + 1, path + ')')
-
-    dfs(0, 0, '')
-    return ans
+    return dp[-1]
 if __name__ == '__main__':
-    print(generateParenthesis(3))
+    coinChange([1,231235],2)

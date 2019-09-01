@@ -8,6 +8,10 @@ class BSTIterator:
     并且某一时刻会有回溯的情况，肯定要用栈来保存的
     用栈来保存的话可以使得存储空间降低到Oh
     hasNext可以是O1，但是next并不能是O1
+    一直appendleft，相当于，最左侧的节点一定是左右都是None的，所以访问了最左侧节点，即使
+    append了right，因为right是None，所以跳过了，
+    那么自然就根据stack，找到了node的上一级节点，也就是左根右的【根】了，而访问了根之后，
+    根据
     """
 
     def __init__(self, root):

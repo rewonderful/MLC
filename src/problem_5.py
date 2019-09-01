@@ -1,5 +1,21 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
+def longestPalindrome2( s: str) -> str:
+    if s == "":
+        return s
+    ans = s[0]
+    n = len(s)
+    dp = [[i == j for i in range(n)] for j in range(n)]
+    for i in range(1, n):
+        if s[i] == s[i - 1]:
+            dp[i - 1][i] = True
+            ans = s[i - 1:i + 1]
+    for j in range(len(s)):
+        for i in range(j - 1):
+            dp[i][j] = dp[i + 1][j - 1] and s[i] == s[j]
+            if dp[i][j] and j - i + 1 > len(ans):
+                ans = s[i:j + 1]
+    return ans
 def longestPalindrome(self, s):
     """
     算法：动态规划DP
@@ -11,7 +27,7 @@ def longestPalindrome(self, s):
         动规：
             动规就是在暴力解法的基础上，优化了判断子串是否为回文串这一步。判断某个位置i,j是不是回文串，可以先看看(i+1,j-1)
         是不是回文串并且是否s[i]==s[j]，故用dp存储s(i,j)是否为回文串，如此便可以建立起状态转移方程：
-            dp[i][j]= dp[i][j] and s[i]==s[j]
+            dp[i][j]= dp[i+1][j-1] and s[i]==s[j]
             边界条件:
                 dp[i][i] = True
                 dp[i][i+1] = s[i]==s[i+1]
@@ -26,7 +42,7 @@ def longestPalindrome(self, s):
         因为状态转移方程要和子状态建立起关系，所以要考虑我们这里的dp存的是什么。以及这个状态转移的【路径】是否正确！就像
         二维矩阵机器人往右下角最少走几步的那种题一样，机器人是可以向右向下走的，所以看一下这里的【路径】是什么
             拿一个上面这种for跑错的结果为示例
-            case:"abcba"，answer:"bcb"e
+            case:"abcba"，answer:"bcb"
             为什么错了？为什么不是"abcba"?
             可以看到，当i==0,j== 4时 dp[0][4] = dp[1][3] and s[0] == s[4]，而遍历到0,4时，1，3还没有遍历！也就是说我依赖的子
         状态还没有求解！所以会导致错误的答案！
@@ -95,4 +111,4 @@ def longestPalindrome1(self, s):
     return res
 if __name__ == '__main__':
     s="abcba"
-    print(longestPalindrome(s))
+    print(longestPalindrome2(s))

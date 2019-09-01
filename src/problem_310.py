@@ -1,5 +1,25 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
+def findMinHeightTrees7( n, edges):
+    ans = []
+    if n == 1:
+        return [0]
+    graph = [[] for _ in range(n)]
+    for x, y in edges:
+        graph[x].append(y)
+        graph[y].append(x)
+
+    margin_node = [i for i in range(n) if len(graph[i]) == 1]
+    while n > 2:
+        new_margin_node = []
+        n -= len(margin_node)
+        for node in margin_node:
+            neighbor = graph[node][0]
+            graph[neighbor].remove(node)
+            if len(graph[neighbor]) == 1:
+                new_margin_node.append(neighbor)
+        margin_node = new_margin_node
+    return margin_node
 def findMinHeightTrees(n, edges):
     """
     算法：类似于拓扑排序/剥洋葱
@@ -66,6 +86,10 @@ def findMinHeightTrees(n, edges):
     while n > 2:
         newleaves = []
         n -= len(leaves)
+        """
+        一次剥一圈，这样的话如果最后的确剩下了两个，那么这俩就都留下来，如果用课程安排问题那样的拓扑排序的话
+        一个一个的剥，最后肯定是能剥到根节点，但是只能留下1个结点
+        """
         for leaf in leaves:
             neighbor = graph[leaf].pop()
             graph[neighbor].remove(leaf)

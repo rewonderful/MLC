@@ -18,5 +18,5 @@ class Solution(object):
                 p.next.next = None
                 p.next = tmp
             else:
-                p = p.next
+                p = p.next #只有p.next和p的val不相等时，才往后挪，否则要一直循环地删除
         return dummy.next

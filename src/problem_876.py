@@ -20,6 +20,11 @@ def middleNode(self, head):
             12，fast跳到12None的None
             但是1的话，fast应该不跳！
             所以好好品一品这里的while条件，不要再写错了！！！
+            ------
+            上面解释了为什么要fast.next，而要求fast ！= None的原因在于要结束循环，比如1234None，最后fast是None了，
+            所以应该退出循环。相当于以前单个指针遍历的时候，p !=None,一个道理
+            因为要走两步，所以其实只是在 p!=None以外又多了一个p.next !=None
+            由于slow一定在fast走过的节点内，所以不用考虑slow，就用fast做判断就可以
     复杂度：
         时间：ON，遍历一遍节点
         空间：O1，常数级

@@ -1,5 +1,45 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
+def searchRange7(nums, target):
+    """
+    :param nums:
+    :param target:
+    :return:
+    用二分查找去找到最左侧的left，
+    用二分查找再去找到最右侧的right
+    要注意的是，和二分查找不一样的地方是返回条件不一样了
+    比如二分查找左侧，
+    当nums[mid] == target时，由于左侧还可能有target，所以r = mid -1 ，而且最后返回的是l
+    因为如果左侧再没有target后，那么左侧的值其实就是一只小于target的，就会l一直++，知道l>r，刚好是最前面的
+    那个target的位置
+    右侧二分查找同理
+    """
+    def binarySearchLeft(nums, target):
+        l, r = 0, len(nums) - 1
+        while l <= r:
+            mid = (l + r) // 2
+            if nums[mid] == target:
+                r = mid - 1
+            elif nums[mid] < target:
+                l = mid + 1
+            else:
+                r = mid - 1
+        return l
+
+    def binarySearchRight(nums, target):
+        l, r = 0, len(nums) - 1
+        while l <= r:
+            mid = (l + r) // 2
+            if nums[mid] == target:
+                l = mid + 1
+            elif nums[mid] < target:
+                l = mid + 1
+            else:
+                r = mid - 1
+        return r
+
+    left, right = binarySearchLeft(nums, target), binarySearchRight(nums, target)
+    return (left, right) if left <= right else [-1, -1]
 def searchRange0( nums, target):
     """
     My Method_v3
@@ -115,5 +155,5 @@ def searchRange2( nums, target):
 
 
 if __name__ == '__main__':
-    print(searchRange0([5,7,7,8,8,10],8))
+    print(searchRange7([5,7,7,8,8,10],8))
 

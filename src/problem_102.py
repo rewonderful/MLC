@@ -6,6 +6,32 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
+def levelOrder7(self, root):
+    """
+    :param self:
+    :param root:
+    :return:
+    这个写的其实不太好
+    """
+    ans = []
+    if root == None:
+        return ans
+    queue = [root]
+    while len(queue) != 0:
+        next_level = []
+        vals = []
+        while len(queue) != 0:
+            node = queue.pop(0)
+            vals.append(node.val)
+            if node.left != None:
+                next_level.append(node.left)
+
+            if node.right != None:
+                next_level.append(node.right)
+
+        ans.append(vals)
+        queue = next_level
+    return ans
 from TreeNode import TreeNode
 def levelOrder( root):
     """

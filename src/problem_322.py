@@ -1,5 +1,18 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
+def coinChange_7(self, coins, amount) :
+    if len(coins) == 0:
+        return -1
+    dp = [-1] * (amount + 1)
+    dp[0] = 0
+
+    for i in range(amount + 1):
+        for coin in coins:
+            if i - coin >= 0 and dp[i - coin] != -1:
+                if dp[i] == -1 or dp[i - coin] + 1 < dp[i]:
+                    dp[i] = dp[i - coin] + 1
+
+    return dp[-1]
 def coinChange0( coins, amount):
     """
     算法：动规PLUS

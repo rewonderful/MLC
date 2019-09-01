@@ -23,6 +23,8 @@ def numTrees(self, n):
     dp = [0] * (n + 1)
     dp[0], dp[1] = 1, 1
     for i in range(2, n + 1):
-        for j in range(1, n + 1):
+        #i是指有i个节点的BST的个数,或者说，i个有序数字的BST个数
+        for j in range(1,i+ 1):
+            #j是指，以j作为root
             dp[i] += dp[j - 1] * dp[i - j]
     return dp[-1]

@@ -13,7 +13,7 @@ def sortedListToBST( head):
         关键在于如何找中间点
             用快慢指针的方法来找中间节点，可以参见第876题
             这里除了找中间点外，还要将整个游戏列表分为左右两个部分
-            所以要找到mid的prev节点，然后设置prev.next = None来断开与mid的联系，进而转化为左右两个链表！
+            所以要找到mid的prev节点，然后【设置prev.next = None来断开与mid的联系】，进而转化为左右两个链表！
             这里我找prev的方法是设置一个prev节点,初始prev.next = head，这样就可以保证prev总是在slow的前一步
             或者另外一种方式见后面
         拿到中间点后以mid值建立节点，左侧就传head递归就好，此时head已经只剩[head,mid)部分了，右侧

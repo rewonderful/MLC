@@ -38,7 +38,7 @@ def findKthLargest( nums, k):
 def findKthLargest(self, nums, k):
     import heapq
     """
-    算法：前N大堆
+    算法：前N大堆，最小堆
         利用最小堆实现一个堆序列，其长度为k个元素，这k个元素组成的最小堆堆顶即是第K大的数字
         1. 首先初始化一个堆，python中用list，
         2. 从原数组nums中逐个将元素push到堆中，若堆的长度小于k时，当前元素直接插入即可
