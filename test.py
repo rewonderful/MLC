@@ -43,18 +43,13 @@
 # 算出鸡翁、鸡母的范围√，算是一种剪枝策略，减少循环数
 # 鸡兔同笼中直接算出来，不是剪枝，是直接解方程，没有发挥计算机
 # 快速进行大量计算的作用
-for x in range(0,21):
-    for y in range(0,34):
-        z = 100-x-y
-        if x*5+y*3+z/3 == 100:
-             print('鸡翁数:\t', x, '鸡母数:\t', y, '鸡雏数:\t', z)
+def test(a,b,c,):
+    print(a,b)
+    #print(kwargs)
+if __name__ == '__main__':
 
-# 5. K数
-# 本题中用除以10**i 来分割数字更好，这样可以将个位数直接纳入考虑
-for num in range(1, 100001):
-    for i in range(0, len(str(num))):
-        left = num // (10**i)
-        right = num % (10**i)
-        if (left+right)**2 == num:
-            print("%d=(%d+%d)**2" % (num, left, right))
-
+    d = {'a':4,
+         'b':5,
+         'c':10}
+    dd = [1,2,3,4]
+    test(*dd)

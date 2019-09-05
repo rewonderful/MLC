@@ -6,6 +6,27 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
+def levelOrder9(self, root) :
+    """
+    :param self:
+    :param root:
+    :return:
+    dfs的方式层次遍历二叉树，非常有趣！
+    """
+
+    self.ans = []
+
+    def dfs(root, level):
+        if root == None:
+            return
+        if len(self.ans) < level + 1:
+            self.ans.append([])
+        self.ans[level].append(root.val)
+        dfs(root.left, level + 1)
+        dfs(root.right, level + 1)
+
+    dfs(root, 0)
+    return self.ans
 def levelOrder7(self, root):
     """
     :param self:
