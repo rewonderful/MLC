@@ -86,5 +86,5 @@ if __name__ == '__main__':
     n2.left = n3
     n2.right = n4
     n5.right = n6
-    print(levelOrder(n1))
+    print(levelOrder9(n1))
 

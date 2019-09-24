@@ -44,7 +44,7 @@ def lengthOfLIS( nums):
         ans = max(ans, dp[i])
     return ans
 
-def lengthOfLIS1( nums):
+def lengthOfLIS_1( nums):
     """
     算法：二分查找
     思路：
@@ -80,4 +80,4 @@ def lengthOfLIS1( nums):
 
 
 if __name__ == '__main__':
-    print(lengthOfLIS3([4,10,4,3,8,9]))
+    print(lengthOfLIS_1([4,10,4,3,8,9]))

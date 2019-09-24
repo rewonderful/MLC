@@ -37,3 +37,25 @@ def canPartition(self, nums):
             if j - nums[i - 1] >= 0:
                 dp[i][j] = dp[i - 1][j] or dp[i - 1][j - nums[i - 1]]
     return dp[-1][-1]
+
+def canPartition(self, nums):
+    """
+    :type nums: List[int]
+    :rtype: bool
+    """
+    if nums == []:
+        return True
+    if sum(nums) % 2 == 1:
+        return False
+    target = sum(nums) / 2
+    dp = [0] * (target + 1)
+    dp[0] = 1
+    for num in nums:
+        i = target
+        while (i >= num):
+            dp[i] = dp[i] + dp[i - num]
+            i = i - 1
+    if dp[target] >= 2:
+        return True
+    else:
+        return False

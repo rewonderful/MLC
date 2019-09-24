@@ -128,8 +128,9 @@ def quick_sort4(nums, l, r):
         nums[l] = pivot
         p = l
 
-        stack.append((p+1,hi))
+
         stack.append((lo, p - 1))
+        stack.append((p + 1, hi))
 
 
 
@@ -149,11 +150,12 @@ def partition_7(nums,l,r):
         nums[r] = nums[l]
     nums[l] = pivot
     return l
+
 if __name__ == '__main__':
     n = 50
     print("BEFORE")
     nums = [ random.randrange(n) for _ in range(n//2)]
     print(nums)
-    quick_sort7(nums,0,len(nums)-1)
+    quick_sort4(nums,0,len(nums)-1)
     print('AFTER')
     print(nums)
